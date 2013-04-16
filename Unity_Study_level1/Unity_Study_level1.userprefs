@@ -2,12 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThirdPerson/InputManager_ThirdPerson.cs">
     <Files>
-      <File FileName="Assets/Scripts/ThirdPerson/InputManager_ThirdPerson.cs" Line="1" Column="19" />
-      <File FileName="Assets/Scripts/ThirdPerson/ThirdPersonPlayer.cs" Line="60" Column="3" />
-      <File FileName="Assets/Scripts/ThirdPerson/ThirdPersonCamera.cs" Line="59" Column="73" />
-      <File FileName="Assets/NGUI/Scripts/Interaction/UIButtonMessage.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Battle/EnemyScript.cs" Line="11" Column="36" />
-      <File FileName="Assets/Scripts/level1/InputManager2.cs" Line="137" Column="5" />
+      <File FileName="Assets/Scripts/Battle/RedMarkScript.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ThirdPerson/ThirdPersonCamera.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ThirdPerson/InputManager_ThirdPerson.cs" Line="174" Column="34" />
+      <File FileName="Assets/Scripts/ThirdPerson/ThirdPersonPlayer.cs" Line="165" Column="35" />
+      <File FileName="Assets/Scripts/ThirdPerson/CameraManager_ver2.cs" Line="41" Column="19" />
+      <File FileName="Assets/Shade 3D Loader/ReadMe_ja.txt" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ThirdPerson/ObjectManager.cs" Line="20" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

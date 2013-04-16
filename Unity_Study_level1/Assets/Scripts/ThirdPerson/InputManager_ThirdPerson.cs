@@ -26,10 +26,12 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 	private LayerMask UIlayerMask = 1 << 9;
 	private LayerMask EnemylayerMask = 1 << 10;
 	
+	private Camera MainCamera;
 	private Camera UICamera;
 		
 	void Awake(){
 		instance = this;
+		MainCamera = GameObject.Find("Main Camera").camera;
 		UICamera = GameObject.Find("UICamera").camera;
 	}
 	
@@ -81,6 +83,11 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 				UIray = UICamera.ScreenPointToRay (touch.position);
 		
 				UtilityRayCast();
+			}else if(touch.phase == TouchPhase.Stationary){
+				ray = Camera.main.ScreenPointToRay (touch.position);
+				UIray = UICamera.ScreenPointToRay (touch.position);
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.white);
+				UtilityRayCastStationary();
 			}
 		}
 	}
@@ -107,6 +114,13 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 				player.SendMessage("Guard");
 			}else if(UIhit.collider.gameObject.name ==  "BackStepButton"){
 				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.red);
+			}else if(UIhit.collider.gameObject.name ==  "RightSprite"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				//Debug.Log("RS");
+			}else if(UIhit.collider.gameObject.name ==  "FrontMove"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				//player.SendMessage("RotateFront");
+				//Debug.Log("MF");
 			}
 			
 			
@@ -117,7 +131,7 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 				if(hit.collider.gameObject.tag ==  "enemy"){
 					Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
 					Debug.Log("EnemyHit!");
-					//red_mark_enemy.transform.position = new Vector3(hit.point.x,hit.point.y + 1.5f,hit.point.z);
+					red_mark_enemy.transform.position = new Vector3(hit.point.x,hit.point.y + 1.5f,hit.point.z);
 					enemy.SendMessage("changeTargetState");	
 				}	
 			}else if(Physics.Raycast(ray , out hit, 100.0f, layerMask)){		
@@ -129,8 +143,39 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 			}
 		}
 	}
+	
+	
+	void UtilityRayCastStationary(){
 		
-		
+		if(Physics.Raycast(UIray , out UIhit, 100.0f)){
+			if(UIhit.collider.gameObject.name ==  "RightSprite"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				//player.SendMessage("RotateRight");
+				MainCamera.SendMessage("RotateRight");
+				//Debug.Log("RS");
+			}else if(UIhit.collider.gameObject.name ==  "LeftSprite"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				MainCamera.SendMessage("RotateLeft");
+				//Debug.Log("LS");
+			}else if(UIhit.collider.gameObject.name ==  "FrontMove"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				player.SendMessage("MoveFront");
+				//Debug.Log("MF");
+			}else if(UIhit.collider.gameObject.name ==  "BackMove"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				player.SendMessage("MoveBack");
+				//Debug.Log("MB");
+			}else if(UIhit.collider.gameObject.name ==  "LeftMove"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				player.SendMessage("MoveLeft");
+				//Debug.Log("MB");
+			}else if(UIhit.collider.gameObject.name ==  "RightMove"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				player.SendMessage("MoveRight");
+				//Debug.Log("MB");
+			}
+		}
+	}
 
 
 	

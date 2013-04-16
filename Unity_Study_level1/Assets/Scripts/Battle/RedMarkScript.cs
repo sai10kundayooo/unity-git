@@ -4,7 +4,7 @@ using System.Collections;
 public class RedMarkScript : MonoBehaviour {
 	
 	private Vector3 position;
-	
+	// 
 	// Use this for initialization
 	void Start () {
 	
