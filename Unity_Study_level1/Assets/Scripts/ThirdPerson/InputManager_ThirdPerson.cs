@@ -28,23 +28,28 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 	
 	private Camera MainCamera;
 	private Camera UICamera;
+	Quaternion gyro;
+	
+	//private bool IsgyroTouch = false;
 		
 	void Awake(){
 		instance = this;
 		MainCamera = GameObject.Find("Main Camera").camera;
 		UICamera = GameObject.Find("UICamera").camera;
+		//Input.gyro.enabled = true;
 	}
-	
 	
 	void Update(){
 #if UNITY_ANDROID || UNITY_IPHONE
 		TapInput();
+		
 #endif
 		
 #if  UNITY_WEBPLAYER
 		MouseInput();
 #endif
 	}
+	
 	// Use this for initialization
 	void Start () {
 		player = GameObject.Find("Player");
@@ -52,6 +57,25 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 		cursor = GameObject.Find("cursor");
 		cursor_p = GameObject.Find("cursor_p");
 		red_mark_enemy = GameObject.Find("RedMark");
+		//Input.gyro.enabled = true;
+	}
+	
+	//
+	void GyroInput(){
+		if (SystemInfo.supportsGyroscope)
+    	{
+        	Input.gyro.enabled = true;
+        	if (Input.gyro.enabled)
+        	{
+            	Debug.Log(Input.gyro.attitude.ToString());
+				player.SendMessage("MoveFront");
+				
+        	}
+    	}
+    	else
+    	{
+        	Debug.Log("Gyro Not Support.");
+    	}
 	}
 	
 	//IF webplayer call
@@ -88,6 +112,11 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 				UIray = UICamera.ScreenPointToRay (touch.position);
 				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.white);
 				UtilityRayCastStationary();
+			}else if(touch.phase == TouchPhase.Ended){
+				ray = Camera.main.ScreenPointToRay (touch.position);
+				UIray = UICamera.ScreenPointToRay (touch.position);
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.white);
+				UtilityRayCastEnded();	
 			}
 		}
 	}
@@ -173,10 +202,23 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
 				player.SendMessage("MoveRight");
 				//Debug.Log("MB");
+			}else if(UIhit.collider.gameObject.name ==  "GyroSprite"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.yellow);
+				//this.IsgyroTouch = true;
+				
+				GyroInput();
 			}
 		}
 	}
 
-
+	void UtilityRayCastEnded(){
+		if(Physics.Raycast(UIray , out UIhit, 100.0f)){
+			if(UIhit.collider.gameObject.name ==  "GyroSprite"){
+				Debug.DrawRay(UIray.origin, UIray.direction * 10, Color.blue);
+				Debug.Log("GyroEnded");
+				//this.IsgyroTouch = false;
+			}
+		}	
+	}
 	
 }

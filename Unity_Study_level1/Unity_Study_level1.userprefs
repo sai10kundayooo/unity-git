@@ -1,6 +1,6 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThirdPerson/InputManager_ThirdPerson.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThirdPerson/ObjectManager.cs">
     <Files>
       <File FileName="Assets/Scripts/Battle/RedMarkScript.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/ThirdPerson/ThirdPersonCamera.cs" Line="1" Column="1" />

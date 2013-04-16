@@ -12,17 +12,16 @@ public class InputManager2 : MonoBehaviour {
 	private RaycastHit hit;
 	private RaycastHit defaultHit;
 	private LayerMask layerMask = 1 << 8;
-	
 	//public TouchManager instance;
 	
 //#define
+	
 	
 	void Awake(){
 		instance = this;
 		//instance.hitPlane.renderer.enabled = false;
 		
 	}
-	
 	
 	void Update(){
 #if UNITY_ANDROID || UNITY_IPHONE
@@ -32,6 +31,7 @@ public class InputManager2 : MonoBehaviour {
 #if  UNITY_WEBPLAYER
 		MouseInput();
 #endif
+		
 	}
 	// Use this for initialization
 	void Start () {
@@ -39,6 +39,7 @@ public class InputManager2 : MonoBehaviour {
 		
 		//
 		player = GameObject.Find("Player");
+		
 	}
 	
 	//IF webplayer call
@@ -99,6 +100,8 @@ public class InputManager2 : MonoBehaviour {
 	}
 	
 	void TapInput(){
+		
+		//Touch
 		foreach (Touch touch in Input.touches)
 		{
 			if (touch.phase == TouchPhase.Began)
