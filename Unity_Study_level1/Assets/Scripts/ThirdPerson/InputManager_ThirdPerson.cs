@@ -60,6 +60,10 @@ public class InputManager_ThirdPerson : MonoBehaviour {
 		//Input.gyro.enabled = true;
 	}
 	
+	
+	void OnGUI(){
+		GUI.Label(new Rect( 30, 30, 300, 50), gyro.ToString());
+	}
 	//
 	void GyroInput(){
 		if (SystemInfo.supportsGyroscope)
@@ -68,8 +72,8 @@ public class InputManager_ThirdPerson : MonoBehaviour {
         	if (Input.gyro.enabled)
         	{
             	Debug.Log(Input.gyro.attitude.ToString());
-				player.SendMessage("MoveFront");
-				
+				//player.SendMessage("MoveFront");
+				gyro = Input.gyro.attitude;
         	}
     	}
     	else
